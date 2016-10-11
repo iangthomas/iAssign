@@ -103,7 +103,7 @@
 					3C3731AD1DAC02DC006E8F94 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 79DFX3SWE8;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -265,6 +265,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kkitcreations.iAssign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0c28d371-6c92-48b9-a156-eaff676824a6";
+				PROVISIONING_PROFILE_SPECIFIER = iAssignDev;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -279,6 +281,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kkitcreations.iAssign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d7d4be6f-c3b2-4d3a-b6a4-7633e1475de2";
+				PROVISIONING_PROFILE_SPECIFIER = iAssignDistribution;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
