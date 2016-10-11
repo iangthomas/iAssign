@@ -72,7 +72,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     }
     
     func dueDateEmptyString() -> String {
-        return "None"
+        return "Not Set Yet"
     }
     
     
@@ -99,8 +99,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             delegate?.assignmentDetailTableViewController(self, didFinishAdding: newItem)
         }
     }
-    
-    
+        
     @IBAction func doneButtonPressed(_ sender: AnyObject) {
         saveAssignment()
         dismiss(animated: true, completion: nil)
@@ -166,7 +165,14 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         dueDateLabel.text = formatter.string(from: dueDate)
     }
     
+    func isFirstTimeShowingDatePicker() -> Bool {
+    
+        return true
+    }
+    
+    
     func showDatePicker () {
+        
         datePickerVisible = true
         let indexPathDatePicker = IndexPath(row: 2, section: 0)
         let indexPathDateRow = IndexPath(row: 1, section: 0)
@@ -178,8 +184,19 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         tableView.reloadRows(at: [indexPathDateRow], with: .none)
         tableView.endUpdates()
 
-        datePicker.setDate(dueDate, animated: false)
         
+        // set it a day ahead by default
+        if dueDateIsEmpty() {
+            let calander = Calendar.current
+            let newDate = calander.date(byAdding: .day, value: 1, to: dueDate)
+            
+            if let date = newDate {
+                datePicker.setDate(date, animated: true)
+                dueDate = date
+            }
+        }
+        
+        datePicker.setDate(dueDate, animated: false)
         updateDueDateLabel()
     }
     
@@ -196,7 +213,6 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             tableView.reloadRows(at: [indexPathDateRow], with: .none)
             tableView.deleteRows(at: [indexPathDatePicker], with: .fade)
             tableView.endUpdates()
-            
         }
     }
     
@@ -240,10 +256,8 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         }
     }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "Photo" {
-            
             
             let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController as! PhotoViewController
@@ -257,34 +271,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
                 saveAssignment()
             }
         }
-        
-
-            
-            /*
-            if let destinationVC = segue.destination as? PhotoViewController {
-                destinationVC.photoString = (assignment?.photoUrlString)!
-                destinationVC.delegate = self
-            }
-            
-            let controller = segue.destination as! PhotoViewController
-            controller.delegate = self
-            
-            if let photoString = assignment?.photoUrlString {
-                controller.photoString = (assignment?.photoUrlString as? String)!
-            }
-        }
-        
-        } else if segue.identifier == "addAssignment" {
-            
-            let navController = segue.destination as! UINavigationController
-            let controller = navController.topViewController as! AssignmentDetailTableViewController
- 
-            controller.delegate = self
-        }
-        */
     }
-
-
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if isTheDateLabelCell(indexPath: indexPath) {

@@ -58,13 +58,14 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         // if there is no image
         if photoString == "" {
-          //  saveButton.isEnabled = false
             title = "Add Photo"
-            addPhotoButton.titleLabel?.text = "Add Photo"
+            addPhotoButton.setTitle("Add Photo", for: .normal)
+
         } else {
            // saveButton.isEnabled = false
             title = "View or Change Photo"
-            addPhotoButton.titleLabel?.text = "Change Photo"
+            addPhotoButton.setTitle("Change Photo", for: .normal)
+
             //load the image
             loadImage()
         }
@@ -132,6 +133,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             photoImageView.image = image
             saveButton.isEnabled = true
+            addPhotoButton.setTitle("Change Photo", for: .normal)
         }
         dismiss(animated: true, completion: nil)
     }
@@ -153,6 +155,4 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                                              in: .userDomainMask)
         return paths[0]
     }
-
-
 }
