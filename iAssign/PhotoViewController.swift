@@ -20,6 +20,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var closeButton: UIBarButtonItem!
         
+    @IBOutlet weak var addPhotoButton: UIButton!
+    
     weak var delegate: PhotoViewControllerDelegate?
     
     @IBAction func saveButtonPressed(_ sender: AnyObject) {
@@ -28,8 +30,6 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         if let image = photoImageView.image {
             
-            let url = URL(string: photoFileName)
-            
             if let data = UIImageJPEGRepresentation(image, 0.9) {
             let filename = documentsDirectory().appendingPathComponent(photoFileName)
 
@@ -37,22 +37,10 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     try data.write(to: filename)
                     delegate?.photoViewController(self, didAddPhoto: photoFileName)
                 } catch {
-                    print ("error")
+                    print ("error saving photo")
                 }
             }
-            
-            /*
-            if let data = UIImageJPEGRepresentation(image, 0.9) {
-                let filename = documentsDirectory().appendingPathComponent(photoFileName)
-                try? data.write(to: filename)
-                
-                // if sucessful... perhas ad something for if the try does not work?
-                
-                delegate?.photoViewController(self, didAddPhoto: filename.absoluteString)
-            }
- */
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -72,48 +60,22 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if photoString == "" {
           //  saveButton.isEnabled = false
             title = "Add Photo"
-
+            addPhotoButton.titleLabel?.text = "Add Photo"
         } else {
            // saveButton.isEnabled = false
             title = "View or Change Photo"
-            
+            addPhotoButton.titleLabel?.text = "Change Photo"
             //load the image
             loadImage()
-            
-            
-            
         }
     }
 
     func loadImage () {
-        
-        
         let path = documentsDirectory().appendingPathComponent(photoString)
-        
         if let data = try? Data (contentsOf: path) {
-            
             let testImage = UIImage (data: data, scale: 1.0)
             photoImageView.image = testImage
         }
-
-        
-      //  let fileManager = FileManager.default
-        
-        
-      //  let imagePath = URL(string: photoString)
-        
-      //  if fileManager.fileExists(atPath: photoString) {
-        
-        // doc dir add!?
-        
-           // photoImageView.image = UIImage(contentsOfFile: path)
-       // }
-        
-       
-        
-       // imagePath.appendPathComponent(photoString)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -183,8 +145,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         formatter.dateStyle = .long
         formatter.timeStyle = .long
         
-        
-        return "test.jpeg"
+      //  return "test.jpeg"
         
         return formatter.string(from: Date()).appending(".jpeg")
     }

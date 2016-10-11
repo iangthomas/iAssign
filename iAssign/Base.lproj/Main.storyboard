@@ -300,6 +300,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoButton" destination="h0T-JA-OdZ" id="OMt-fD-Fye"/>
                         <outlet property="closeButton" destination="bdz-Us-mrH" id="W4D-Sm-Xnq"/>
                         <outlet property="photoImageView" destination="Rvl-qP-7Bc" id="jIz-Zq-Vmw"/>
                         <outlet property="saveButton" destination="2XD-Pk-K2w" id="ts4-vz-Hmb"/>

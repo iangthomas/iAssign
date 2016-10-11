@@ -106,11 +106,26 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
     
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        // data model
+        deleteAssignmentPhoto(assignments[indexPath.row])
         assignments.remove(at: indexPath.row)
+        
+        // UI
         let indexPath = [indexPath]
         tableView.deleteRows(at: indexPath, with: .automatic)
     }
     
+    
+    func deleteAssignmentPhoto (_ theAssignment: Assignment) {
+        let path = documentsDirectory().appendingPathComponent(theAssignment.photoUrlString)
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(at: path)
+        } catch {
+            print ("couldn't delete photo file")
+        }
+    }
     
     func loadAssignments () {
         let path = dataDirectory()
