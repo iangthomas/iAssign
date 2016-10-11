@@ -60,12 +60,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if photoString == "" {
             title = "Add Photo"
             addPhotoButton.setTitle("Add Photo", for: .normal)
+            closeButton.title = "Cancel"
 
         } else {
            // saveButton.isEnabled = false
             title = "View or Change Photo"
             addPhotoButton.setTitle("Change Photo", for: .normal)
-
+            closeButton.title = "Back"
             //load the image
             loadImage()
         }
