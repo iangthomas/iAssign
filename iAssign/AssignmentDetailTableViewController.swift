@@ -62,7 +62,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             doneSwitch.isOn = false
             titleTextField.becomeFirstResponder()
             
-            titleTextField.returnKeyType = .continue
+            titleTextField.returnKeyType = .next
             dueDateLabel.text = dueDateEmptyString()
         }
     }
@@ -328,5 +328,10 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     func photoViewController(_ controller: PhotoViewController, didAddPhoto photoString: String) {
         assignment?.photoUrlString = photoString
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        tableView.setContentOffset(CGPoint(x: 0, y: textField.center.y-60), animated: true)
     }
 }
