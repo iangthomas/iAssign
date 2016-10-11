@@ -24,11 +24,13 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     
     var dueDate = Date()
     var datePickerVisible = false
+    var showKeyboard = false
+    
+    weak var delegate: AssignmentDetailTableViewControllerDelegate?
+
     
     @IBOutlet weak var datePickerCell: UITableViewCell!
     @IBOutlet weak var datePicker: UIDatePicker!
-    
-    weak var delegate: AssignmentDetailTableViewControllerDelegate?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var notesTextField: UITextField!
@@ -60,10 +62,21 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             doneButton.isEnabled = false
             examSwitch.isOn = false
             doneSwitch.isOn = false
-            titleTextField.becomeFirstResponder()
+            // if this is called here, the app scrolls too far up and the initial text field cant even been seen on a 7+!
+        //    titleTextField.becomeFirstResponder()
+            showKeyboard = true
             
             titleTextField.returnKeyType = .next
             dueDateLabel.text = dueDateEmptyString()
+        }
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if showKeyboard {
+            titleTextField.becomeFirstResponder()
         }
     }
     
@@ -328,10 +341,5 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     func photoViewController(_ controller: PhotoViewController, didAddPhoto photoString: String) {
         assignment?.photoUrlString = photoString
         dismiss(animated: true, completion: nil)
-    }
-    
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        tableView.setContentOffset(CGPoint(x: 0, y: textField.center.y-60), animated: true)
     }
 }
