@@ -17,11 +17,9 @@ protocol PhotoViewControllerDelegate: class {
 class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var photoImageView: UIImageView!
-
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var closeButton: UIBarButtonItem!
-    
-    
+        
     weak var delegate: PhotoViewControllerDelegate?
     
     @IBAction func saveButtonPressed(_ sender: AnyObject) {
@@ -30,6 +28,20 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         if let image = photoImageView.image {
             
+            let url = URL(string: photoFileName)
+            
+            if let data = UIImageJPEGRepresentation(image, 0.9) {
+            let filename = documentsDirectory().appendingPathComponent(photoFileName)
+
+                do {
+                    try data.write(to: filename)
+                    delegate?.photoViewController(self, didAddPhoto: photoFileName)
+                } catch {
+                    print ("error")
+                }
+            }
+            
+            /*
             if let data = UIImageJPEGRepresentation(image, 0.9) {
                 let filename = documentsDirectory().appendingPathComponent(photoFileName)
                 try? data.write(to: filename)
@@ -38,9 +50,15 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 
                 delegate?.photoViewController(self, didAddPhoto: filename.absoluteString)
             }
+ */
         }
+        
+        dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func closedButtonPressed(_ sender: AnyObject) {
+         dismiss(animated: true, completion: nil)
+    }
     
     var photoString = ""
     
@@ -57,7 +75,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
         } else {
            // saveButton.isEnabled = false
-            title = "View and Edit Photo"
+            title = "View or Change Photo"
             
             //load the image
             loadImage()
@@ -69,11 +87,26 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
     func loadImage () {
         
-        let fileManager = FileManager.default
-        let imagePath = URL(string: photoString)
+        
+        let path = documentsDirectory().appendingPathComponent(photoString)
+        
+        if let data = try? Data (contentsOf: path) {
+            
+            let testImage = UIImage (data: data, scale: 1.0)
+            photoImageView.image = testImage
+        }
+
+        
+      //  let fileManager = FileManager.default
+        
+        
+      //  let imagePath = URL(string: photoString)
         
       //  if fileManager.fileExists(atPath: photoString) {
-            photoImageView.image = UIImage(contentsOfFile: photoString)
+        
+        // doc dir add!?
+        
+           // photoImageView.image = UIImage(contentsOfFile: path)
        // }
         
        
@@ -149,6 +182,10 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .long
+        
+        
+        return "test.jpeg"
+        
         return formatter.string(from: Date()).appending(".jpeg")
     }
     

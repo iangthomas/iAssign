@@ -112,8 +112,6 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
     }
     
     
-    
-    
     func loadAssignments () {
         let path = dataDirectory()
         if let data = try? Data (contentsOf: path) {
@@ -132,10 +130,7 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
     func dataDirectory () -> URL {
         return documentsDirectory().appendingPathComponent("Assignments.plist")
     }
-    
-    
-
-    
+        
     func saveAssignments () {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)

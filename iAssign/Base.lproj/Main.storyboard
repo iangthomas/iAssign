@@ -290,7 +290,7 @@
                     <navigationItem key="navigationItem" id="TIs-6R-Mbv">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="bdz-Us-mrH">
                             <connections>
-                                <action selector="ClosedButtonPressed:" destination="hjs-gi-K1H" id="tka-cA-xj6"/>
+                                <action selector="closedButtonPressed:" destination="hjs-gi-K1H" id="elM-kj-foj"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="2XD-Pk-K2w">
