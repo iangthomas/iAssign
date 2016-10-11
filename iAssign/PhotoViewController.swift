@@ -144,9 +144,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .long
-        
-      //  return "test.jpeg"
-        
+
         return formatter.string(from: Date()).appending(".jpeg")
     }
     
