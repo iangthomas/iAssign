@@ -155,7 +155,16 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
         data.write(to: dataDirectory(), atomically: true)
     }
     
+    //
+    // Shake to Homework!
+    //
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            let randomIndex = Int(arc4random_uniform(UInt32(assignments.count)))
+            let assignment = assignments[randomIndex]
+            performSegue(withIdentifier: "editAssignment", sender: assignment)
+        }
+    }
     
-
 }
 
