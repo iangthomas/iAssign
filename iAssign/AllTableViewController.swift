@@ -89,7 +89,6 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
         assignments.append(item)
         tableView.reloadData()
         
-        dismiss(animated: true, completion: nil)
     }
     
     func assignmentDetailTableViewController(_ controller: AssignmentDetailTableViewController,
@@ -103,6 +102,13 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
             }
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        assignments.remove(at: indexPath.row)
+        let indexPath = [indexPath]
+        tableView.deleteRows(at: indexPath, with: .automatic)
     }
     
     

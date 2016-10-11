@@ -199,9 +199,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="hjs-gi-K1H" kind="show" id="W2E-oZ-bbV"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -232,6 +229,7 @@
                         <outlet property="examSwitch" destination="OKL-xW-VoZ" id="dS9-nI-fe2"/>
                         <outlet property="notesTextField" destination="fgx-st-WD1" id="0VP-7J-XSd"/>
                         <outlet property="titleTextField" destination="O5t-Gd-hDu" id="fgh-g2-D6w"/>
+                        <segue destination="4hP-6e-nah" kind="show" identifier="Photo" id="WT8-WQ-8Df"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZX-G2-Pgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,13 +287,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="TIs-6R-Mbv">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="bdz-Us-mrH">
+                            <connections>
+                                <action selector="ClosedButtonPressed:" destination="hjs-gi-K1H" id="tka-cA-xj6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="2XD-Pk-K2w">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="hjs-gi-K1H" id="qvc-RS-8ZD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="closeButton" destination="bdz-Us-mrH" id="W4D-Sm-Xnq"/>
                         <outlet property="photoImageView" destination="Rvl-qP-7Bc" id="jIz-Zq-Vmw"/>
+                        <outlet property="saveButton" destination="2XD-Pk-K2w" id="ts4-vz-Hmb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOh-iO-KEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4446" y="200"/>
+            <point key="canvasLocation" x="5527.1999999999998" y="198.35082458770617"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0eZ-Nd-HDM">
@@ -349,6 +361,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oyl-7f-qXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2625" y="200"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HKv-M8-Q1m">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4hP-6e-nah" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9bB-LU-1G5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hjs-gi-K1H" kind="relationship" relationship="rootViewController" id="OTE-E5-F40"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sQm-Le-M2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4588" y="198.35082458770617"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

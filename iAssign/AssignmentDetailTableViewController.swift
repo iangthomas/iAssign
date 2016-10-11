@@ -18,7 +18,7 @@ protocol AssignmentDetailTableViewControllerDelegate: class {
 }
 
 
-class AssignmentDetailTableViewController: UITableViewController, UITextFieldDelegate, PhotoViewControllerDelegate {
+class AssignmentDetailTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, PhotoViewControllerDelegate {
 
     var assignment: Assignment?
     
@@ -75,7 +75,8 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         return "None"
     }
     
-    @IBAction func doneButtonPressed(_ sender: AnyObject) {
+    
+    func saveAssignment () {
         
         //editing
         if let item = assignment {
@@ -93,9 +94,16 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             newItem.done = doneSwitch.isOn
             newItem.exam = examSwitch.isOn
             newItem.dueDate = dueDate
+            assignment = newItem
             
             delegate?.assignmentDetailTableViewController(self, didFinishAdding: newItem)
         }
+    }
+    
+    
+    @IBAction func doneButtonPressed(_ sender: AnyObject) {
+        saveAssignment()
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func cancelButtonPressed(_ sender: AnyObject) {
@@ -227,9 +235,57 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             } else {
                 showDatePicker()
             }
+        } else if isThePictureCell(indexPath: indexPath) {
+            performSegue(withIdentifier: "Photo", sender: nil)
         }
     }
     
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "Photo" {
+            
+            
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController as! PhotoViewController
+            
+            controller.delegate = self
+            
+            if let photoString = assignment?.photoUrlString {
+                controller.photoString = photoString
+            } else {
+                // we need to save the assignment before going to the next page, so that the phot can be saved somewhere!
+                saveAssignment()
+            }
+        }
+        
+
+            
+            /*
+            if let destinationVC = segue.destination as? PhotoViewController {
+                destinationVC.photoString = (assignment?.photoUrlString)!
+                destinationVC.delegate = self
+            }
+            
+            let controller = segue.destination as! PhotoViewController
+            controller.delegate = self
+            
+            if let photoString = assignment?.photoUrlString {
+                controller.photoString = (assignment?.photoUrlString as? String)!
+            }
+        }
+        
+        } else if segue.identifier == "addAssignment" {
+            
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController as! AssignmentDetailTableViewController
+ 
+            controller.delegate = self
+        }
+        */
+    }
+
+
+
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if isTheDateLabelCell(indexPath: indexPath) {
             return indexPath
@@ -268,12 +324,14 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         dueDate = datePicker.date
         updateDueDateLabel()
     }
-    
     //
     // end date picker stuff
     //
     
     
+    //
+    // photo stuff
+    //
     func isThePictureCell (indexPath: IndexPath) -> Bool {
         let photoIndexPath = IndexPath(row:2, section: 2)
         
@@ -281,7 +339,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     }
     
     func photoViewController(_ controller: PhotoViewController, didAddPhoto photoString: String) {
-        
+        assignment?.photoUrlString = photoString
+        dismiss(animated: true, completion: nil)
     }
-    
 }
