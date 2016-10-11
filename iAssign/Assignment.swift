@@ -14,6 +14,8 @@ class Assignment: NSObject, NSCoding {
     var note = ""
     var done = false
     var exam = false
+    var dueDate = Date()
+    var photoUrlString = ""
     
     override init() {
         super.init()
@@ -24,6 +26,9 @@ class Assignment: NSObject, NSCoding {
         note = aDecoder.decodeObject(forKey: "note") as! String
         done = aDecoder.decodeBool(forKey: "done")
         exam = aDecoder.decodeBool(forKey: "exam")
+        dueDate = aDecoder.decodeObject(forKey: "dueDate") as! Date
+        photoUrlString = aDecoder.decodeObject(forKey: "photoUrlString") as! String
+        
         super.init()
     }
     
@@ -32,15 +37,7 @@ class Assignment: NSObject, NSCoding {
         aCoder.encode(done, forKey: "done")
         aCoder.encode(exam, forKey: "exam")
         aCoder.encode(note, forKey: "note")
+        aCoder.encode(dueDate, forKey: "dueDate")
+        aCoder.encode(photoUrlString, forKey: "photoUrlString")
     }
-    
-    func toggleDone () {
-        done = !done
-    }
-    
-    func toggleExam () {
-        exam = !exam
-    }
-    
-
 }

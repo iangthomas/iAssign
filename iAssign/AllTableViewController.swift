@@ -65,7 +65,7 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
             controller.delegate = self
             
          //   if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                controller.assignment = sender as! Assignment
+                controller.assignment = sender as? Assignment
          //   }
             
             

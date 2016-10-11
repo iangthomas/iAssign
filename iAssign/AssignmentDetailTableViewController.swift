@@ -18,9 +18,16 @@ protocol AssignmentDetailTableViewControllerDelegate: class {
 }
 
 
-class AssignmentDetailTableViewController: UITableViewController, UITextFieldDelegate {
+class AssignmentDetailTableViewController: UITableViewController, UITextFieldDelegate, PhotoViewControllerDelegate {
 
     var assignment: Assignment?
+    
+    var dueDate = Date()
+    var datePickerVisible = false
+    
+    @IBOutlet weak var datePickerCell: UITableViewCell!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
     weak var delegate: AssignmentDetailTableViewControllerDelegate?
     
     @IBOutlet weak var titleTextField: UITextField!
@@ -31,17 +38,22 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
+    @IBOutlet weak var dueDateLabel: UILabel!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         if let item = assignment {
             title = "Edit Assignment"
-            doneButton.isEnabled = false
+            doneButton.isEnabled = true
             titleTextField.text = item.name
+            titleTextField.returnKeyType = .default
             notesTextField.text = item.note
             doneSwitch.isOn = item.done
             examSwitch.isOn = item.exam
+            dueDate = item.dueDate
+            updateDueDateLabel()
             
         } else {
             title = "Add Assignment"
@@ -49,12 +61,18 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             examSwitch.isOn = false
             doneSwitch.isOn = false
             titleTextField.becomeFirstResponder()
+            
+            titleTextField.returnKeyType = .continue
+            dueDateLabel.text = dueDateEmptyString()
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func dueDateEmptyString() -> String {
+        return "None"
     }
     
     @IBAction func doneButtonPressed(_ sender: AnyObject) {
@@ -65,7 +83,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             item.note = notesTextField.text!
             item.done = doneSwitch.isOn
             item.exam = examSwitch.isOn
-            
+            item.dueDate = dueDate
             
             delegate?.assignmentDetailTableViewController(self, didFinishEditing: item)
         } else {
@@ -74,6 +92,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             newItem.note = notesTextField.text!
             newItem.done = doneSwitch.isOn
             newItem.exam = examSwitch.isOn
+            newItem.dueDate = dueDate
             
             delegate?.assignmentDetailTableViewController(self, didFinishAdding: newItem)
         }
@@ -83,79 +102,186 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         delegate?.assignmentDetailTableViewControllerDidCancel(self)
     }
     
+    
+    //
+    // text field stuff
+    //
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let oldText = textField.text! as NSString
         let newText = oldText.replacingCharacters(in: range, with: string) as NSString
         doneButton.isEnabled = newText.length > 0
-        
         return true
     }
     
-    // MARK: - Table view data source
-/*
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        ifIsFirstResponderThenResign()
+
+        if dueDateIsEmpty() {
+            showDatePicker()
+        }
+        return true
     }
+    
+    func ifIsFirstResponderThenResign() {
+        
+        if titleTextField.isFirstResponder {
+            titleTextField.resignFirstResponder()
+            titleTextField.returnKeyType = .default // this handles the case for after the user presses continue when making the assigment for the first time, subsiquently it should be return
+        } else if notesTextField.isFirstResponder {
+            notesTextField.resignFirstResponder()
+        }
+    }
+    
+    func dueDateIsEmpty() -> Bool {
+        
+        if dueDateLabel.text == dueDateEmptyString() {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+    //
+    // date stuff
+    //
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }*/
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        hideDatePicker()
+    }
+    
+    func updateDueDateLabel() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        dueDateLabel.text = formatter.string(from: dueDate)
+    }
+    
+    func showDatePicker () {
+        datePickerVisible = true
+        let indexPathDatePicker = IndexPath(row: 2, section: 0)
+        let indexPathDateRow = IndexPath(row: 1, section: 0)
+        
+        dueDateLabel!.textColor = dueDateLabel!.tintColor
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: [indexPathDatePicker], with: .fade)
+        tableView.reloadRows(at: [indexPathDateRow], with: .none)
+        tableView.endUpdates()
 
-    /*
+        datePicker.setDate(dueDate, animated: false)
+        
+        updateDueDateLabel()
+    }
+    
+    func hideDatePicker () {
+        if datePickerVisible {
+            datePickerVisible = false
+            
+            let indexPathDatePicker = IndexPath(row: 2, section: 0)
+            let indexPathDateRow = IndexPath(row: 1, section: 0)
+
+            dueDateLabel!.textColor = UIColor(white: 0, alpha: 0.5)
+            
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPathDateRow], with: .none)
+            tableView.deleteRows(at: [indexPathDatePicker], with: .fade)
+            tableView.endUpdates()
+            
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        if isTheDatePicker(indexPath: indexPath) {
+            return datePickerCell
+        } else {
+            return super.tableView(tableView, cellForRowAt: indexPath)
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 && datePickerVisible {
+            return 3
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isTheDatePicker(indexPath: indexPath) {
+            return 217
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+      
+        ifIsFirstResponderThenResign()
+        
+        if isTheDateLabelCell(indexPath: indexPath) {
+            if datePickerVisible {
+                hideDatePicker()
+            } else {
+                showDatePicker()
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if isTheDateLabelCell(indexPath: indexPath) {
+            return indexPath
+        } else if isThePictureCell(indexPath: indexPath) {
+            return indexPath
+        } else {
+            return nil
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func isTheDateLabelCell(indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            return true
+        } else {
+            return false
+        }
     }
-    */
-
+    
+    func isTheDatePicker(indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 && indexPath.row == 2 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        var newIndexPath = indexPath
+        if isTheDatePicker(indexPath: indexPath) {
+            newIndexPath = IndexPath(row: 0, section: indexPath.section)
+        }
+        return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
+    }
+    
+    @IBAction func dateChanged(_ datePicker: UIDatePicker) {
+        dueDate = datePicker.date
+        updateDueDateLabel()
+    }
+    
+    //
+    // end date picker stuff
+    //
+    
+    
+    func isThePictureCell (indexPath: IndexPath) -> Bool {
+        let photoIndexPath = IndexPath(row:2, section: 2)
+        
+        return indexPath == photoIndexPath
+    }
+    
+    func photoViewController(_ controller: PhotoViewController, didAddPhoto photoString: String) {
+        
+    }
+    
 }

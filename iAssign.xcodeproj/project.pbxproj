@@ -14,6 +14,7 @@
 		3C3731BC1DAC02DC006E8F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C3731BA1DAC02DC006E8F94 /* LaunchScreen.storyboard */; };
 		3C3731C41DAC04FA006E8F94 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731C31DAC04FA006E8F94 /* Assignment.swift */; };
 		3C3731C61DAC0892006E8F94 /* AssignmentDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731C51DAC0892006E8F94 /* AssignmentDetailTableViewController.swift */; };
+		3C3731D21DAC4D54006E8F94 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731D11DAC4D54006E8F94 /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3C3731BD1DAC02DC006E8F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C3731C31DAC04FA006E8F94 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		3C3731C51DAC0892006E8F94 /* AssignmentDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailTableViewController.swift; sourceTree = "<group>"; };
+		3C3731D11DAC4D54006E8F94 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +60,11 @@
 		3C3731B01DAC02DC006E8F94 /* iAssign */ = {
 			isa = PBXGroup;
 			children = (
+				3C3731C31DAC04FA006E8F94 /* Assignment.swift */,
 				3C3731B11DAC02DC006E8F94 /* AppDelegate.swift */,
 				3C3731B31DAC02DC006E8F94 /* AllTableViewController.swift */,
 				3C3731C51DAC0892006E8F94 /* AssignmentDetailTableViewController.swift */,
-				3C3731C31DAC04FA006E8F94 /* Assignment.swift */,
+				3C3731D11DAC4D54006E8F94 /* PhotoViewController.swift */,
 				3C3731B51DAC02DC006E8F94 /* Main.storyboard */,
 				3C3731B81DAC02DC006E8F94 /* Assets.xcassets */,
 				3C3731BA1DAC02DC006E8F94 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 				3C3731B41DAC02DC006E8F94 /* AllTableViewController.swift in Sources */,
 				3C3731B21DAC02DC006E8F94 /* AppDelegate.swift in Sources */,
 				3C3731C61DAC0892006E8F94 /* AssignmentDetailTableViewController.swift in Sources */,
+				3C3731D21DAC4D54006E8F94 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +312,7 @@
 				3C3731C21DAC02DC006E8F94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
