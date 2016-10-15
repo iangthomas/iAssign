@@ -18,7 +18,7 @@ protocol AssignmentDetailTableViewControllerDelegate: class {
 }
 
 
-class AssignmentDetailTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, PhotoViewControllerDelegate {
+class AssignmentDetailTableViewController: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate, PhotoViewControllerDelegate {
 
     var assignment: Assignment?
     
@@ -31,13 +31,15 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     
     weak var delegate: AssignmentDetailTableViewControllerDelegate?
 
+    
+    @IBOutlet weak var notesTextView: UITextView!
+    
     @IBOutlet weak var pictureThumb: UIImageView!
     
     @IBOutlet weak var datePickerCell: UITableViewCell!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var notesTextField: UITextField!
     
     @IBOutlet weak var doneSwitch: UISwitch!
     @IBOutlet weak var examSwitch: UISwitch!
@@ -49,31 +51,28 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
+        setupNotesView()
         
         if let item = assignment {
             title = editTitle
             doneButton.isEnabled = true
             titleTextField.text = item.name
             titleTextField.returnKeyType = .default
-            notesTextField.text = item.note
+            notesTextView.text = item.note
             doneSwitch.isOn = item.done
             examSwitch.isOn = item.exam
             dueDate = item.dueDate
             updateDueDateLabel()
             
-            
             showPhotoThumbnail()
-            
             
         } else {
             title = "Add Assignment"
             doneButton.isEnabled = false
             examSwitch.isOn = false
             doneSwitch.isOn = false
-            // if this is called here, the app scrolls too far up and the initial text field cant even been seen on a 7+!
-        //    titleTextField.becomeFirstResponder()
             showKeyboardOnAppear = true
-            
             titleTextField.returnKeyType = .next
             dueDateLabel.text = dueDateEmptyString()
             
@@ -109,7 +108,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         //editing
         if let item = assignment {
             item.name = titleTextField.text!
-            item.note = notesTextField.text!
+            item.note = notesTextView.text!
             item.done = doneSwitch.isOn
             item.exam = examSwitch.isOn
             item.dueDate = dueDate
@@ -118,7 +117,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         } else {
             let newItem = Assignment()
             newItem.name = titleTextField.text!
-            newItem.note = notesTextField.text!
+            newItem.note = notesTextView.text!
             newItem.done = doneSwitch.isOn
             newItem.exam = examSwitch.isOn
             newItem.dueDate = dueDate
@@ -169,8 +168,8 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         if titleTextField.isFirstResponder {
             titleTextField.resignFirstResponder()
             titleTextField.returnKeyType = .default // this handles the case for after the user presses continue when making the assigment for the first time, subsiquently it should be return
-        } else if notesTextField.isFirstResponder {
-            notesTextField.resignFirstResponder()
+        } else if notesTextView.isFirstResponder {
+            notesTextView.resignFirstResponder()
         }
     }
     
@@ -203,7 +202,6 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     
         return true
     }
-    
     
     func showDatePicker () {
         
@@ -271,9 +269,22 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             return 217
         } else if isPhotoCell(indexPath: indexPath) {
             return 150
-        } else {
-            return super.tableView(tableView, heightForRowAt: indexPath)
+        } else if isNotesCell(indexPath: indexPath) {
+            
+            if let _ = assignment {
+                if let noteString = assignment?.note {
+                    let height = findHeightForText(text: noteString, havingWidth: self.view.frame.width - 10, andFont: UIFont.systemFont(ofSize: 18.0)).height
+                    
+                    if height < 44 {
+                        return 44
+                    } else {
+                        return height + 44 // the "+" is for extra  padding
+                    }
+                }
+            }
         }
+        return super.tableView(tableView, heightForRowAt: indexPath)
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -412,6 +423,49 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         return paths[0]
     }
     
+    //
+    // notes stuff
+    //
+    func isNotesCell (indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 && indexPath.row == 0 {
+            return true
+        }
+        return false
+    }
     
+    func findHeightForText(text: String, havingWidth widthValue: CGFloat, andFont font: UIFont) -> CGSize {
+        
+        var size = CGSize.zero
+        if text.isEmpty == false {
+            
+            let frame = text.boundingRect(with: CGSize(width: widthValue, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+            size = CGSize(width: frame.size.width, height: ceil(frame.size.height) + 1)
+        }
+        return size
+    }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        hideDatePicker()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n" {
+            notesTextView.resignFirstResponder()
+            
+            saveAssignment() // must be called for resize to work
+            
+            tableView.reloadData() // this resizes the tableview to be the right size for the note
+        }
+        return true
+    }
+    
+    func setupNotesView () {
+        let color = UIColor.init(colorLiteralRed: 0.93, green: 0.93, blue: 0.93, alpha: 1.0)
+        notesTextView!.layer.borderWidth = 1
+        notesTextView!.layer.borderColor = color.cgColor
+        notesTextView!.layer.cornerRadius = 8.0
+    }
+    
+
 }
