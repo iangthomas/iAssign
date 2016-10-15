@@ -60,8 +60,8 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "editAssignment" {
-            let navController = segue.destination as! UINavigationController
-            let controller = navController.topViewController as! AssignmentDetailTableViewController
+
+            let controller = segue.destination as! AssignmentDetailTableViewController
             controller.delegate = self
             
          //   if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {

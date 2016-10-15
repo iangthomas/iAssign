@@ -68,6 +68,13 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             
             titleTextField.returnKeyType = .next
             dueDateLabel.text = dueDateEmptyString()
+            
+            let cancelBarButton = UIBarButtonItem (title: "Cancel",
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(cancelButtonPressed))
+            
+            self.navigationItem.leftBarButtonItem = cancelBarButton
         }
     }
     
@@ -118,7 +125,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
+    func cancelButtonPressed(_ sender: AnyObject) {
         delegate?.assignmentDetailTableViewControllerDidCancel(self)
     }
     
