@@ -129,9 +129,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BZ7-0a-FKZ">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZ7-0a-FKZ">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                     <connections>
@@ -278,7 +277,7 @@
                     </tableViewCellContentView>
                 </tableViewCell>
             </objects>
-            <point key="canvasLocation" x="3525.5999999999999" y="199.25037481259372"/>
+            <point key="canvasLocation" x="3246" y="206"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="Ic8-s9-Q2w">
@@ -332,7 +331,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOh-iO-KEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5527.1999999999998" y="198.35082458770617"/>
+            <point key="canvasLocation" x="4830" y="210"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0eZ-Nd-HDM">
@@ -348,7 +347,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v7F-1F-B6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2625" y="945"/>
+            <point key="canvasLocation" x="2433" y="906"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T7z-lz-nLh">
@@ -366,7 +365,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SdC-Ax-ADM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816.79999999999995" y="200.14992503748127"/>
+            <point key="canvasLocation" x="1618" y="206"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HKv-M8-Q1m">
@@ -384,11 +383,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQm-Le-M2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4588" y="198.35082458770617"/>
+            <point key="canvasLocation" x="4039" y="206"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="40D-wk-ETj"/>
+        <segue reference="v1j-rE-0Mh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.66069656610488892" blue="0.068765245378017426" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
