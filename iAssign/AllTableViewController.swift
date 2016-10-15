@@ -19,6 +19,8 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
     }
     
     override func viewDidLoad() {
+        
+        navigationItem.leftBarButtonItem = editButtonItem
         super.viewDidLoad()
     }
 
@@ -50,14 +52,12 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
         let assignment = assignments[indexPath.row]
         performSegue(withIdentifier: "editAssignment", sender: assignment)
     }
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "editAssignment" {
 
@@ -68,8 +68,6 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
                 controller.assignment = sender as? Assignment
          //   }
             
-            
-            
         } else if segue.identifier == "addAssignment" {
             let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController as! AssignmentDetailTableViewController
@@ -77,18 +75,14 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
         }
     }
     
-    
-    
     func assignmentDetailTableViewControllerDidCancel(_ controller: AssignmentDetailTableViewController) {
         dismiss(animated: true, completion: nil)
     }
-    
     
     func assignmentDetailTableViewController(_ controller: AssignmentDetailTableViewController,
                                              didFinishAdding item: Assignment) {
         assignments.append(item)
         tableView.reloadData()
-        
     }
     
     func assignmentDetailTableViewController(_ controller: AssignmentDetailTableViewController,
@@ -104,9 +98,10 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
         dismiss(animated: true, completion: nil)
     }
     
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
+        if editingStyle == .delete {
+
         // data model
         deleteAssignmentPhoto(assignments[indexPath.row])
         assignments.remove(at: indexPath.row)
@@ -114,8 +109,12 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
         // UI
         let indexPath = [indexPath]
         tableView.deleteRows(at: indexPath, with: .automatic)
+        }
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     func deleteAssignmentPhoto (_ theAssignment: Assignment) {
         let path = documentsDirectory().appendingPathComponent(theAssignment.photoUrlString)
@@ -167,4 +166,3 @@ class AllTableViewController: UITableViewController, AssignmentDetailTableViewCo
     }
     
 }
-
