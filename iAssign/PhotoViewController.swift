@@ -80,6 +80,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory,
+                                             in: .userDomainMask)
+        return paths[0]
+    }
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -151,9 +158,4 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         return formatter.string(from: Date()).appending(".jpeg")
     }
     
-    func documentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory,
-                                             in: .userDomainMask)
-        return paths[0]
-    }
-}
+   }

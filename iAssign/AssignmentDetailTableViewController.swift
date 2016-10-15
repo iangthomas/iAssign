@@ -26,8 +26,12 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     var datePickerVisible = false
     var showKeyboard = false
     
+    
+    let editTitle = "Edit Assignment"
+    
     weak var delegate: AssignmentDetailTableViewControllerDelegate?
 
+    @IBOutlet weak var pictureThumb: UIImageView!
     
     @IBOutlet weak var datePickerCell: UITableViewCell!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -47,7 +51,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         super.viewDidLoad()
         
         if let item = assignment {
-            title = "Edit Assignment"
+            title = editTitle
             doneButton.isEnabled = true
             titleTextField.text = item.name
             titleTextField.returnKeyType = .default
@@ -56,6 +60,10 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             examSwitch.isOn = item.exam
             dueDate = item.dueDate
             updateDueDateLabel()
+            
+            
+            showPhotoThumbnail()
+            
             
         } else {
             title = "Add Assignment"
@@ -121,8 +129,14 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     }
         
     @IBAction func doneButtonPressed(_ sender: AnyObject) {
+        
         saveAssignment()
-        dismiss(animated: true, completion: nil)
+
+        if title == editTitle {
+            _ = navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     func cancelButtonPressed(_ sender: AnyObject) {
@@ -255,6 +269,8 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if isTheDatePicker(indexPath: indexPath) {
             return 217
+        } else if isPhotoCell(indexPath: indexPath) {
+            return 150
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
@@ -349,4 +365,40 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         assignment?.photoUrlString = photoString
         dismiss(animated: true, completion: nil)
     }
+    
+    func showPhotoThumbnail () {
+        loadImage()
+    }
+    
+    func isPhotoCell(indexPath: IndexPath) -> Bool {
+        
+        if indexPath.section == 2 && indexPath.row == 2 {
+            if let assignemnt = assignment {
+                if assignemnt.photoUrlString.characters.count > 0 {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func loadImage () {
+        
+        if let photoString = assignment?.photoUrlString {
+            let path = documentsDirectory().appendingPathComponent(photoString)
+            if let data = try? Data (contentsOf: path) {
+                let testImage = UIImage (data: data, scale: 1.0)
+                pictureThumb.image = testImage
+            }
+        }
+    }
+    
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory,
+                                             in: .userDomainMask)
+        return paths[0]
+    }
+    
+    
+    
 }
