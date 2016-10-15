@@ -24,7 +24,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     
     var dueDate = Date()
     var datePickerVisible = false
-    var showKeyboard = false
+    var showKeyboardOnAppear = false
     
     
     let editTitle = "Edit Assignment"
@@ -72,7 +72,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             doneSwitch.isOn = false
             // if this is called here, the app scrolls too far up and the initial text field cant even been seen on a 7+!
         //    titleTextField.becomeFirstResponder()
-            showKeyboard = true
+            showKeyboardOnAppear = true
             
             titleTextField.returnKeyType = .next
             dueDateLabel.text = dueDateEmptyString()
@@ -90,7 +90,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if showKeyboard {
+        if showKeyboardOnAppear {
             titleTextField.becomeFirstResponder()
         }
     }
@@ -363,8 +363,21 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     
     func photoViewController(_ controller: PhotoViewController, didAddPhoto photoString: String) {
         assignment?.photoUrlString = photoString
+        
+        // prevent the titel from becoming first responder after adding a photo
+        showKeyboardOnAppear = false
+
+        loadNewlyAddedPhoto()
+        
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    func loadNewlyAddedPhoto () {
+        tableView.reloadData()
+        showPhotoThumbnail()
+    }
+    
     
     func showPhotoThumbnail () {
         loadImage()
