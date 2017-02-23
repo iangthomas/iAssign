@@ -1,6 +1,5 @@
 # iAssign
 An assignment planner app; a remake of the first app I co-created in 2009.
 
-<img width="290" src="https://cloud.githubusercontent.com/assets/13486833/23280058/9e0567aa-f9cc-11e6-88f2-375628624908.jpeg">     <img width="290" src="https://cloud.githubusercontent.com/assets/13486833/23280059/9e0831ec-f9cc-11e6-9aa7-5759ed595c3d.png">
-<img width="290" src="https://cloud.githubusercontent.com/assets/13486833/23280061/9e8d6eb6-f9cc-11e6-81bb-78e097602ec9.png">
-
+<img width="290" src="https://cloud.githubusercontent.com/assets/13486833/23242391/5b18d66a-f92d-11e6-89eb-248bbeb995c2.png">
+<img width="290" src="https://cloud.githubusercontent.com/assets/13486833/23242392/5b1b6d8a-f92d-11e6-8d25-82aba964fdf6.png">
