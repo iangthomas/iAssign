@@ -8,6 +8,9 @@
 
 import UIKit
 
+import Fabric
+import Crashlytics
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +18,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let defaults = UserDefaults.standard
+        let dictionary = [
+            "assignmentsMade": 0,
+            "kauto_crash_reporting": true,
+            "kauto_anonymous_stats": true
+            ] as [String : Any]
+        
+        defaults.register(defaults: dictionary)
+        defaults.synchronize()
+        
+        if UserDefaults.standard.bool(forKey: "kauto_crash_reporting") == true {
+            Fabric.with([Crashlytics.self])
+        }
+        
+        if UserDefaults.standard.bool(forKey: "kauto_anonymous_stats") == true {
+            Fabric.with([Answers.self])
+        }
+        
         return true
     }
 

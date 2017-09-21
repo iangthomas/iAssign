@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Crashlytics
 
 protocol AssignmentDetailTableViewControllerDelegate: class {
     func assignmentDetailTableViewControllerDidCancel(_ controller: AssignmentDetailTableViewController)
@@ -129,6 +129,8 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         
     @IBAction func doneButtonPressed(_ sender: AnyObject) {
         
+        updateAnalytics()
+        
         saveAssignment()
 
         if title == editTitle {
@@ -137,8 +139,19 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
             dismiss(animated: true, completion: nil)
         }
     }
-
-    func cancelButtonPressed(_ sender: AnyObject) {
+    
+    func updateAnalytics() {
+        var num_assignments = UserDefaults.standard.object(forKey: "assignmentsMade") as! Int
+        num_assignments += 1
+        UserDefaults.standard.set(num_assignments, forKey: "assignmentsMade")
+        
+        if UserDefaults.standard.bool(forKey: "kauto_anonymous_stats") == true {
+            Answers.logCustomEvent(withName: "made_an_assignment", customAttributes: nil)
+        }
+        
+    }
+    
+    @objc func cancelButtonPressed(_ sender: AnyObject) {
         delegate?.assignmentDetailTableViewControllerDidCancel(self)
     }
     
@@ -438,7 +451,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         var size = CGSize.zero
         if text.isEmpty == false {
             
-            let frame = text.boundingRect(with: CGSize(width: widthValue, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+            let frame = text.boundingRect(with: CGSize(width: widthValue, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
             size = CGSize(width: frame.size.width, height: ceil(frame.size.height) + 1)
         }
         return size
@@ -461,7 +474,8 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
     }
     
     func setupNotesView () {
-        let color = UIColor.init(colorLiteralRed: 0.93, green: 0.93, blue: 0.93, alpha: 1.0)
+        
+        let color = UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1.0)
         notesTextView!.layer.borderWidth = 1
         notesTextView!.layer.borderColor = color.cgColor
         notesTextView!.layer.cornerRadius = 8.0

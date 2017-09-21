@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0477DC9A71F06E07D6338C1D /* Pods_iAssign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE5403F383911841A876045 /* Pods_iAssign.framework */; };
 		3C3731B21DAC02DC006E8F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731B11DAC02DC006E8F94 /* AppDelegate.swift */; };
 		3C3731B41DAC02DC006E8F94 /* AllTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731B31DAC02DC006E8F94 /* AllTableViewController.swift */; };
 		3C3731B71DAC02DC006E8F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C3731B51DAC02DC006E8F94 /* Main.storyboard */; };
@@ -14,6 +15,7 @@
 		3C3731C41DAC04FA006E8F94 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731C31DAC04FA006E8F94 /* Assignment.swift */; };
 		3C3731C61DAC0892006E8F94 /* AssignmentDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731C51DAC0892006E8F94 /* AssignmentDetailTableViewController.swift */; };
 		3C3731D21DAC4D54006E8F94 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3731D11DAC4D54006E8F94 /* PhotoViewController.swift */; };
+		3C85BE721F7451B80053D0A3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C85BE711F7451B50053D0A3 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		3C3731C31DAC04FA006E8F94 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		3C3731C51DAC0892006E8F94 /* AssignmentDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailTableViewController.swift; sourceTree = "<group>"; };
 		3C3731D11DAC4D54006E8F94 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		3C85BE711F7451B50053D0A3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		3FE5403F383911841A876045 /* Pods_iAssign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iAssign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FB7ACD98109D084CBD496A6 /* Pods-iAssign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iAssign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iAssign/Pods-iAssign.debug.xcconfig"; sourceTree = "<group>"; };
+		D95F1FCE18BBCF2F6F9EED79 /* Pods-iAssign.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iAssign.release.xcconfig"; path = "Pods/Target Support Files/Pods-iAssign/Pods-iAssign.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +39,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0477DC9A71F06E07D6338C1D /* Pods_iAssign.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		114E439D6966A152D9CE731E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4FB7ACD98109D084CBD496A6 /* Pods-iAssign.debug.xcconfig */,
+				D95F1FCE18BBCF2F6F9EED79 /* Pods-iAssign.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3C3731A51DAC02DC006E8F94 = {
 			isa = PBXGroup;
 			children = (
 				3C3731B01DAC02DC006E8F94 /* iAssign */,
 				3C3731AF1DAC02DC006E8F94 /* Products */,
+				114E439D6966A152D9CE731E /* Pods */,
+				BFAD5A3EFFAF41174627636A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +76,25 @@
 		3C3731B01DAC02DC006E8F94 /* iAssign */ = {
 			isa = PBXGroup;
 			children = (
-				3C3731C31DAC04FA006E8F94 /* Assignment.swift */,
 				3C3731B11DAC02DC006E8F94 /* AppDelegate.swift */,
 				3C3731B31DAC02DC006E8F94 /* AllTableViewController.swift */,
 				3C3731C51DAC0892006E8F94 /* AssignmentDetailTableViewController.swift */,
+				3C3731C31DAC04FA006E8F94 /* Assignment.swift */,
 				3C3731D11DAC4D54006E8F94 /* PhotoViewController.swift */,
 				3C3731B51DAC02DC006E8F94 /* Main.storyboard */,
 				3C3731B81DAC02DC006E8F94 /* Assets.xcassets */,
 				3C3731BD1DAC02DC006E8F94 /* Info.plist */,
+				3C85BE711F7451B50053D0A3 /* Settings.bundle */,
 			);
 			path = iAssign;
+			sourceTree = "<group>";
+		};
+		BFAD5A3EFFAF41174627636A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FE5403F383911841A876045 /* Pods_iAssign.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +104,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C3731C01DAC02DC006E8F94 /* Build configuration list for PBXNativeTarget "iAssign" */;
 			buildPhases = (
+				284EF5596D2BE2BA9A98D441 /* [CP] Check Pods Manifest.lock */,
 				3C3731AA1DAC02DC006E8F94 /* Sources */,
 				3C3731AB1DAC02DC006E8F94 /* Frameworks */,
 				3C3731AC1DAC02DC006E8F94 /* Resources */,
+				CC0E7ED2F51C9BD7C686F8B4 /* [CP] Embed Pods Frameworks */,
+				594D1FC6D75FBC0A21C4D87E /* [CP] Copy Pods Resources */,
+				3C85BE701F74503E0053D0A3 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -97,13 +128,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "KKIT Creations";
 				TargetAttributes = {
 					3C3731AD1DAC02DC006E8F94 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 79DFX3SWE8;
-						ProvisioningStyle = Manual;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -130,12 +162,75 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C85BE721F7451B80053D0A3 /* Settings.bundle in Resources */,
 				3C3731B91DAC02DC006E8F94 /* Assets.xcassets in Resources */,
 				3C3731B71DAC02DC006E8F94 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		284EF5596D2BE2BA9A98D441 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3C85BE701F74503E0053D0A3 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 5a7fcaab4e8a02b006a96526cf41d6d543ddd19c 5f57d26a084fae0a22a8aa4a6a7ea1668821d1263ecb63bac4f2c27735d17496";
+		};
+		594D1FC6D75FBC0A21C4D87E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iAssign/Pods-iAssign-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC0E7ED2F51C9BD7C686F8B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iAssign/Pods-iAssign-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C3731AA1DAC02DC006E8F94 /* Sources */ = {
@@ -173,7 +268,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -181,7 +278,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -222,7 +324,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -230,7 +334,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -257,33 +366,42 @@
 		};
 		3C3731C11DAC02DC006E8F94 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FB7ACD98109D084CBD496A6 /* Pods-iAssign.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 79DFX3SWE8;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = iAssign/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kkitcreations.iAssign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0c28d371-6c92-48b9-a156-eaff676824a6";
-				PROVISIONING_PROFILE_SPECIFIER = iAssignDev;
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		3C3731C21DAC02DC006E8F94 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D95F1FCE18BBCF2F6F9EED79 /* Pods-iAssign.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 79DFX3SWE8;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = iAssign/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kkitcreations.iAssign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d7d4be6f-c3b2-4d3a-b6a4-7633e1475de2";
-				PROVISIONING_PROFILE_SPECIFIER = iAssignDistribution;
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
