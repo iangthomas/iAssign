@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.0.2</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -34,6 +34,8 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>With camera access, you can take pictures of assignments, instead of copying them down.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Add photos to your assignments</string>
 	<key>UILaunchStoryboardName</key>
@@ -44,8 +46,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>With camera access, you can take pictures of assignments, instead of copying them down.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
