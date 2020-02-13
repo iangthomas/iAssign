@@ -411,7 +411,7 @@ class AssignmentDetailTableViewController: UITableViewController, UITextFieldDel
         
         if indexPath.section == 2 && indexPath.row == 2 {
             if let assignemnt = assignment {
-                if assignemnt.photoUrlString.characters.count > 0 {
+                if assignemnt.photoUrlString.count > 0 {
                     return true
                 }
             }
